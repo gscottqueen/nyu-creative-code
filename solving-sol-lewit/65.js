@@ -11,7 +11,7 @@ function setup() {
 } // initialize our canvas and settings
 
 /**
- * Takes in an array of n numbers and number 0 through 255 to create and color
+ * Takes in an array of numbers and number 0 through 255 to create and color
  * our lines
  * @param {array} coordinates - The title of the book.
  * @param {number} color - The author of the book.
