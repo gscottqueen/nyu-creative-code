@@ -11,42 +11,33 @@ function setup() {
 } // initialize our canvas and settings
 
 /**
- * Takes in an array of numbers and number 0 through 255 to create and color
- * our lines
- * @param {array} coordinates - The title of the book.
- * @param {number} color - The author of the book.
+ * draws and colors our lines on canvas
+ * @param {number} min - minimum coordinate
+ * @param {number} max - maximum coordinate
+ * @param {number} color 0-255
  */
-function drawLines(coordinates, color) {
+function drawLines(min, max, color) {
   stroke(color);
   // draw from top to bottom
   line(
-    coordinates[0],
-    coordinates[1],
-    coordinates[2],
-    coordinates[3]
+    random(min, max),
+    min,
+    random(min, max),
+    max
   );
   // draw from left to right
   line(
-    coordinates[1],
-    coordinates[0],
-    coordinates[3],
-    coordinates[2]
+    min,
+    random(min, max),
+    max,
+    random(min, max)
   );
 }
 
 function draw() {
   for (let i = 0; i < NUMBER_OF_LINES; i++) {
     let randomColor = (255 / NUMBER_OF_COLORS) * random(1, NUMBER_OF_COLORS);
-    const max = CANVAS_WIDTH;
-    const min = 0;
-    drawLines([
-      random(min, max),
-      min,
-      random(min, max),
-      max
-    ],
-    randomColor
-    );
+    drawLines(0, CANVAS_WIDTH, randomColor);
   }
   noLoop();
 }
