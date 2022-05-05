@@ -55,6 +55,7 @@ function star(x, y, numberOfPoints, color) {
   fill(color);
   noStroke()
 
+  // brought in from stars example https://p5js.org/examples/form-star.html
   for (let a = 0; a < TWO_PI; a += angle) {
     let sx = x + cos(a) * RADIUS_1;
     let sy = y + sin(a) * RADIUS_1;
