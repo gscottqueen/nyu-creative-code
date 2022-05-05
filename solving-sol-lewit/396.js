@@ -14,44 +14,37 @@ function setup() {
 
 function draw() {
   // black five-pointed star
-  push();
+  gridOutput();
   star(
       HORIZONTAL_CENTER - RADIUS_1 - OFFSET,
       VERTICAL_CENTER - RADIUS_1 - OFFSET,
       5,
       'black'
     );
-  pop();
 
   // yellow six-pointed star
-  push();
   star(
       HORIZONTAL_CENTER + RADIUS_1 + OFFSET,
       VERTICAL_CENTER - RADIUS_1 - OFFSET,
       6,
       'yellow'
     );
-  pop();
 
   // red seven-pointed star
-  push();
   star(
       HORIZONTAL_CENTER - RADIUS_1 - OFFSET,
       VERTICAL_CENTER + RADIUS_1 + OFFSET,
       7,
       'red'
     );
-  pop();
 
   // blue eight-pointed star
-  push();
   star(
       HORIZONTAL_CENTER + RADIUS_1 + OFFSET,
       VERTICAL_CENTER + RADIUS_1 + OFFSET,
       8,
       'blue'
     );
-  pop();
 }
 
 function star(x, y, numberOfPoints, color) {
@@ -60,7 +53,7 @@ function star(x, y, numberOfPoints, color) {
   // set up shape
   beginShape();
   fill(color);
-  stroke(color);
+  noStroke()
 
   for (let a = 0; a < TWO_PI; a += angle) {
     let sx = x + cos(a) * RADIUS_1;
