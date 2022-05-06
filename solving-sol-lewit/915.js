@@ -134,7 +134,7 @@ function draw() {
           curveVertex(x * xspacing, bandHeight / 2 + yvalues[x])
         }
         // curveVertex(bandWidth, bandHeight/2)
-        curveVertex(bandWidth, bandHeight)
+        curveVertex(bandWidth * xspacing, bandHeight)
         curveVertex(0, bandHeight)
         curveVertex(0, bandHeight)
       endShape();
