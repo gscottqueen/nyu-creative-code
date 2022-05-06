@@ -72,7 +72,7 @@ const BANDS_COLORS = [
     color1: "blue",
     color2: "purple",
     amplitude: "35",
-    period: "200",
+    period: "150",
   },
 ];
 
@@ -89,17 +89,20 @@ function draw() {
   ARCS_1_COLORS.forEach((color, i) => {
     drawFillArc1(color, i);
   });
+
   translate(CANVAS_SEG, 0);
   ARCS_2_COLORS.forEach((color, i) => {
     drawFillArc2(color, i);
   });
-  // draw circle
+
+  // draw circle block
   translate(CANVAS_SEG * 2, 0);
   CIRCLE_COLORS.forEach((color, i) => {
     drawFillCircles(color, i);
   });
   translate(-CANVAS_SEG, 0);
-  // draw first square
+
+  // draw squares block
   fill("purple");
   rect(0, 0, CANVAS_SEG, CANVAS_SEG);
   fill("red");
@@ -111,6 +114,7 @@ function draw() {
   );
   translate(CANVAS_SEG * 2, 0);
 
+  // draw irregular bands
   const bandHeight = CANVAS_HEIGHT / BANDS_COLORS.length;
   const bandWidth = CANVAS_SEG * 2;
   const xspacing = 16; // Distance between each horizontal location
@@ -154,7 +158,6 @@ function draw() {
     noStroke();
     translate(0, bandHeight);
   });
-
   noLoop();
 }
 
