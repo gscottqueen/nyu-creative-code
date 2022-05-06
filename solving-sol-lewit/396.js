@@ -14,12 +14,11 @@ function setup() {
 
 function draw() {
   // black five-pointed star
-  gridOutput();
   star(
     HORIZONTAL_CENTER - RADIUS_1 - OFFSET,
     VERTICAL_CENTER - RADIUS_1 - OFFSET,
     5,
-    "black"
+    '#050505'
   );
 
   // yellow six-pointed star
@@ -27,7 +26,7 @@ function draw() {
     HORIZONTAL_CENTER + RADIUS_1 + OFFSET,
     VERTICAL_CENTER - RADIUS_1 - OFFSET,
     6,
-    "yellow"
+    '#ffe632'
   );
 
   // red seven-pointed star
@@ -35,7 +34,7 @@ function draw() {
     HORIZONTAL_CENTER - RADIUS_1 - OFFSET,
     VERTICAL_CENTER + RADIUS_1 + OFFSET,
     7,
-    "red"
+    '#d4405a'
   );
 
   // blue eight-pointed star
@@ -43,7 +42,7 @@ function draw() {
     HORIZONTAL_CENTER + RADIUS_1 + OFFSET,
     VERTICAL_CENTER + RADIUS_1 + OFFSET,
     8,
-    "blue"
+    '#0094c8'
   );
 }
 

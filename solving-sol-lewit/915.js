@@ -121,7 +121,6 @@ function draw() {
   const yvalues = new Array(floor(bandWidth + xspacing / xspacing)); // Using an array to store height values for the wave
 
   function calcWave(amplitude, period) {
-    console.log("working");
     const theta = 0; // Start angle at 0
     // const amplitude = 75.0; // Height of wave
     const dx = (TWO_PI / period) * xspacing; // Value for incrementing x
