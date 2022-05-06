@@ -1,4 +1,5 @@
 // Wall Drawing #65 (1971) Lines not short, not straight, crossing and touching, drawn at random, using four colors, uniformly dispersed with maximum density, covering the entire surface of the wall.
+
 const CANVAS_WIDTH = 400;
 const CANVAS_HEIGHT = 400;
 const LINE_WEIGHT = 1;
@@ -19,19 +20,9 @@ function setup() {
 function drawLines(min, max, color) {
   stroke(color);
   // draw from top to bottom
-  line(
-    random(min, max),
-    min,
-    random(min, max),
-    max
-  );
+  line(random(min, max), min, random(min, max), max);
   // draw from left to right
-  line(
-    min,
-    random(min, max),
-    max,
-    random(min, max)
-  );
+  line(min, random(min, max), max, random(min, max));
 }
 
 function draw() {

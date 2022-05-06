@@ -2,11 +2,11 @@
 
 const CANVAS_WIDTH = 400;
 const CANVAS_HEIGHT = 400;
-const RADIUS_1 = 70 // outside radius
-const RADIUS_2 = RADIUS_1 / 2 // inside radius
-const HORIZONTAL_CENTER = CANVAS_WIDTH/2
-const VERTICAL_CENTER = CANVAS_HEIGHT/2
-const OFFSET = RADIUS_2 / 2
+const RADIUS_1 = 70; // outside radius
+const RADIUS_2 = RADIUS_1 / 2; // inside radius
+const HORIZONTAL_CENTER = CANVAS_WIDTH / 2;
+const VERTICAL_CENTER = CANVAS_HEIGHT / 2;
+const OFFSET = RADIUS_2 / 2;
 
 function setup() {
   createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -16,35 +16,35 @@ function draw() {
   // black five-pointed star
   gridOutput();
   star(
-      HORIZONTAL_CENTER - RADIUS_1 - OFFSET,
-      VERTICAL_CENTER - RADIUS_1 - OFFSET,
-      5,
-      'black'
-    );
+    HORIZONTAL_CENTER - RADIUS_1 - OFFSET,
+    VERTICAL_CENTER - RADIUS_1 - OFFSET,
+    5,
+    "black"
+  );
 
   // yellow six-pointed star
   star(
-      HORIZONTAL_CENTER + RADIUS_1 + OFFSET,
-      VERTICAL_CENTER - RADIUS_1 - OFFSET,
-      6,
-      'yellow'
-    );
+    HORIZONTAL_CENTER + RADIUS_1 + OFFSET,
+    VERTICAL_CENTER - RADIUS_1 - OFFSET,
+    6,
+    "yellow"
+  );
 
   // red seven-pointed star
   star(
-      HORIZONTAL_CENTER - RADIUS_1 - OFFSET,
-      VERTICAL_CENTER + RADIUS_1 + OFFSET,
-      7,
-      'red'
-    );
+    HORIZONTAL_CENTER - RADIUS_1 - OFFSET,
+    VERTICAL_CENTER + RADIUS_1 + OFFSET,
+    7,
+    "red"
+  );
 
   // blue eight-pointed star
   star(
-      HORIZONTAL_CENTER + RADIUS_1 + OFFSET,
-      VERTICAL_CENTER + RADIUS_1 + OFFSET,
-      8,
-      'blue'
-    );
+    HORIZONTAL_CENTER + RADIUS_1 + OFFSET,
+    VERTICAL_CENTER + RADIUS_1 + OFFSET,
+    8,
+    "blue"
+  );
 }
 
 function star(x, y, numberOfPoints, color) {
@@ -53,7 +53,7 @@ function star(x, y, numberOfPoints, color) {
   // set up shape
   beginShape();
   fill(color);
-  noStroke()
+  noStroke();
 
   // brought in from stars example https://p5js.org/examples/form-star.html
   for (let a = 0; a < TWO_PI; a += angle) {
