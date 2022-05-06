@@ -53,22 +53,26 @@ const BANDS_COLORS = [
   {
     'color1' : 'orange',
     'color2' : 'blue',
-    'peaks' : '2'
+    'amplitude' : '35',
+    'period' : '300'
   },
   {
     'color1' : 'purple',
     'color2' : 'red',
-    'peaks' : '4'
+    'amplitude' : '20',
+    'period' : '200'
   },
   {
     'color1' : 'yellow',
     'color2' : 'green',
-    'peaks' : '2'
+    'amplitude' : '35',
+    'period' : '600'
   },
   {
     'color1' : 'blue',
     'color2' : 'purple',
-    'peaks' : '4'
+    'amplitude' : '35',
+    'period' : '200'
   }
 ]
 
@@ -101,32 +105,49 @@ function draw() {
   fill('red')
   rect(ARCH_WIDTH, ARCH_WIDTH, CANVAS_SEG - ARCH_WIDTH * 2, CANVAS_SEG - ARCH_WIDTH * 2);
   translate(CANVAS_SEG * 2, 0)
+
+  const bandHeight = CANVAS_HEIGHT / BANDS_COLORS.length
+  const bandWidth = CANVAS_SEG * 2
+  const xspacing = 16; // Distance between each horizontal location
+  const yvalues = new Array(floor(bandWidth + xspacing / xspacing)); // Using an array to store height values for the wave
+
+  function calcWave(amplitude, period) {
+    console.log('working')
+    const theta = 0; // Start angle at 0
+    // const amplitude = 75.0; // Height of wave
+    const dx = (TWO_PI / period) * xspacing; // Value for incrementing x
+
+    // For every x value, calculate a y value with sine function
+    let x = theta;
+    for (let i = 0; i < yvalues.length; i++) {
+      yvalues[i] = sin(x) * amplitude;
+      x += dx;
+    }
+  }
+
+  function renderWave() {
+      beginShape();
+        curveVertex(0, bandHeight/2)
+        curveVertex(0, bandHeight/2)
+        for (let x = 0; x < yvalues.length; x++) {
+          // ellipse(x * xspacing, height / 2 + yvalues[x], 16, 16);
+          curveVertex(x * xspacing, bandHeight / 2 + yvalues[x])
+        }
+        // curveVertex(bandWidth, bandHeight/2)
+        curveVertex(bandWidth, bandHeight)
+        curveVertex(0, bandHeight)
+        curveVertex(0, bandHeight)
+      endShape();
+  }
   // draw bands
   BANDS_COLORS.forEach((band,i) => {
-    const bandHeight = CANVAS_HEIGHT / BANDS_COLORS.length
-    const bandWidth = CANVAS_SEG * 2
-    const waveWidth = bandWidth / band.peaks
-    const halfWave = waveWidth / 2
     fill(band.color1)
     rect(0, 0, bandWidth, CANVAS_HEIGHT / BANDS_COLORS.length)
     // draw vertex curve
     fill(band.color2)
-    beginShape();
-    curveVertex(0, bandHeight);
-    curveVertex(0, bandHeight);
-    curveVertex(0, bandHeight / 2);
-
-    for (p = 0; p < band.peaks; p++) {
-      // first half of wave
-      curveVertex(waveWidth * p, bandHeight / 4);
-      // second half of wave
-      curveVertex(waveWidth * p, bandHeight / 2);
-    }
-
-    curveVertex(bandWidth, bandHeight / 2);
-    curveVertex(bandWidth, bandHeight);
-    curveVertex(bandWidth, bandHeight);
-    endShape();
+    calcWave(band.amplitude, band.period);
+    renderWave();
+    noStroke();
     translate(0, bandHeight)
   })
 
