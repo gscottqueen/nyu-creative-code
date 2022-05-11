@@ -16,7 +16,8 @@ const BLACK = '#000000'
 // 2 = beige square bordered
 // 3 = beige circle inside black square
 
-// you can see more about multi-dimensional arrays here https://javascript.plainenglish.io/javascript-multi-dimensional-arrays-7186e8edd03
+// you can see more about multi-dimensional arrays
+// here https://javascript.plainenglish.io/javascript-multi-dimensional-arrays-7186e8edd03
 
 const GRID_MATRICES = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -40,7 +41,7 @@ const GRID_MATRICES = [
 ]
 
 // Setup Global Functions
-function getMaxGridHeight() {
+function getMaxGridHeight(windowWidth) {
   // create an array of dimensions x,y by length
   // the return should contain [<number-of-rows>, <number-of-cols-per-row>]
   const dimensions = [
@@ -59,8 +60,6 @@ function getMaxGridHeight() {
   // return our calculated gridHeight
   return maxGridHeight
 }
-// uncomment the code below to see return in console
-// console.log(getMaxGridHeight())
 
 function setup() {
   // remove default browser margin on the body element
@@ -70,7 +69,7 @@ function setup() {
   // we need to pass a max grid height as the second varable to keep the dynamic
   // ratio in relationship to the amount of rows we might expect to generate
   // from our GRID_MATRICES array
-  createCanvas(windowWidth, getMaxGridHeight())
+  createCanvas(windowWidth, getMaxGridHeight(windowWidth))
 }
 
 function draw() {
@@ -83,7 +82,8 @@ function draw() {
 
     // each index in the nested array represents a col
 
-    // when nesting for loops it is best practice to initalize the first variable as "i", and the second variable as "j"
+    // when nesting for loops it is best practice to initalize the first
+    // variable as "i", and the second variable as "j"
 
     for (let j = 0; j < GRID_MATRICES[i].length; j++) {
       // multiply each index by size to get our x,y offsets
@@ -94,7 +94,8 @@ function draw() {
       // create a switch statment based on case match of values stored in
       // our GRID_MATRICES array, ie.j = 1
 
-      // you can see more about switch statments here https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
+      // you can see more about switch statments
+      // here https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
 
       // in order to get at the value of in our 2d Array for each case
       // we need to find the coordinate in the matrices by combining row
@@ -134,5 +135,5 @@ function draw() {
         }
       }
     }
-    noLoop() // we only need to draw once
+  noLoop() // we only need to draw once
 }
