@@ -1,49 +1,51 @@
 // Schematic Composition
 // Sophie Taeuber-Arp1933
 // Physical Dimensions: 35 3/8 x 49 1/4" (89.6 x 125 cm)
-// const CANVAS_WIDTH = window.width;
-// const CANVAS_HEIGHT = 600;
 const BEIGE = '#ebdcc5'
 const BLACK = '#000000'
-
-function setup() {
-  createCanvas(windowWidth, windowHeight)
-  background(BEIGE)
-}
-
-// create a 2dimensional array that represents a grid layout of the reference
-// drawing from the following criteria
-// cols = 22
-// rows = 14
+// create a 2dimensional array that represents a grid layout of the
+// black box with detail from the following criteria
 // 0 = black square
 // 1 = beige square
 // 2 = beige square bordered
 // 3 = beige circle inside black square
-
-const gridMatrices = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 1, 1, 1, 1, 1, 0, 3, 0, 1, 1, 0, 3, 0, 3, 0, 2, 2, 2, 2, 2, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0],
-  [0, 1, 1, 1, 1, 1, 0, 3, 0, 1, 1, 0, 3, 0, 3, 0, 1, 1, 1, 1, 1, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 1, 1, 1, 1, 1, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 1, 1, 1, 0, 3, 0],
+const GRID_MATRICES = [
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+[1, 1, 0, 1, 1, 1, 1, 1, 0, 3, 0, 1, 1, 0, 3, 0, 3, 0, 2, 2, 2, 2, 2, 0, 1, 1],
+[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+[1, 1, 0, 1, 1, 1, 1, 1, 0, 3, 0, 1, 1, 0, 3, 0, 3, 0, 1, 1, 1, 1, 1, 0, 1, 1],
+[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 1, 1, 1, 1, 1, 0, 1, 1],
+[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 1, 1, 1, 0, 3, 0, 1, 1],
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ]
 
-function draw() {
+const GRID_DIMENSIONS = [
+  GRID_MATRICES.length,
+  GRID_MATRICES.reduce((x, y) => Math.max(x, y.length), 0)
+];
 
-  const startOffset = 80
-  translate(startOffset, startOffset)
-  // loop through 2dArray of gridMatrices drawing squares
+console.log(GRID_DIMENSIONS)
+
+function setup() {
+  const MAX_GRID_HEIGHT = (windowWidth / GRID_DIMENSIONS[1]) * GRID_DIMENSIONS[0]
+  console.log(MAX_GRID_HEIGHT)
+  createCanvas(windowWidth, MAX_GRID_HEIGHT)
+  background(BEIGE)
+}
+
+function draw() {
+  // loop through 2dArray of GRID_MATRICES drawing squares
   // each index in the arrray represents a row
-  for (let i = 0; i < gridMatrices.length; i++) {
+  for (let i = 0; i < GRID_MATRICES.length; i++) {
     // we can get a dynamic squareSize by utilizing our setup width
-    // but we have to remember to consider the startOffset that
-    // creates the beige border. This allows us to create a
-    // responsive drawing
-    const squareSize = (width - startOffset*2) / gridMatrices[i].length
+    // to create a responsive drawing
+    const squareSize = width / GRID_MATRICES[i].length
     // each index in the nested array represents a col
-    for (let j = 0; j < gridMatrices[i].length; j++) {
+    for (let j = 0; j < GRID_MATRICES[i].length; j++) {
       // multiply each index by size to get our x,y offsets
       const x = j * squareSize;
       const y = i * squareSize;
@@ -53,7 +55,7 @@ function draw() {
       // in order to get at the value of in our 2d Array for each case
       // we need to find the coordinate in the matrices by combining row
       // and col index, ie. array[<row-index>][<col-index>]
-      switch (gridMatrices[i][j]) {
+      switch (GRID_MATRICES[i][j]) {
         case 1:
           // 1 = beige square
           noStroke()
