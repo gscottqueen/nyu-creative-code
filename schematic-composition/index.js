@@ -19,45 +19,30 @@ function setup() {
 // 3 = beige circle inside black square
 
 const gridMatrices = [
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 1, 1, 1, 1, 1, 0, 3, 0, 1, 1, 0, 3, 0, 3, 0, 2, 2, 2, 2, 2, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0,
-  0, 1, 1, 1, 1, 1, 0, 3, 0, 1, 1, 0, 3, 0, 3, 0, 1, 1, 1, 1, 1, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 1, 1, 1, 1, 1, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 1, 1, 1, 0, 3, 0,
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 1, 1, 1, 1, 0, 3, 0, 1, 1, 0, 3, 0, 3, 0, 2, 2, 2, 2, 2, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 1, 1, 1, 1, 0, 3, 0, 1, 1, 0, 3, 0, 3, 0, 1, 1, 1, 1, 1, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 1, 1, 1, 1, 1, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 1, 1, 1, 0, 3, 0],
 ]
 
 console.log(gridMatrices.length)
 
 function draw() {
-  // loop through gridMatrices drawing squares
-  let rowNumber = 1
-  gridMatrices.forEach((square, i) => {
-    console.log(square)
-    // because we are drawing squares, let's just use one size for length and width
-    const squareSize = 40
-    rect(0, 0, squareSize, squareSize)
-    text(i, 10, 10, 70, 80);
-
-    // to find if a number is a multiple of another we can use
-    // the remainder opperator "%"
-    // the index length value at "i", when divided by 21 gives gives us a remainder of 0, so it it returns true if we run the opperator -> i % 22 === 0
-    // and because the first index length value of "i" is 0, we want to make sure we only consider index length values that are _not_ equal to 0 with the following opperator i !== 0
-    // you can see these values when it runs by uncommenting the consloe log below
-    // it will print the (index length value, the remainder of the evaluation, and the truthy value if the remainder is equal to 0 as a number)
-    // console.log(i, i % 21, i % 21 === 0)
-    // let rowNumber = 1
-    console.log(i, rowNumber, i % 22, i % 22 === 0)
-    if (i !== 0 && i % 22 === 0) {
-      const x = -squareSize * 22
-      const y = squareSize
-      console.log(x, y)
-      translate(x, y)
-      rowNumber++
-    } else {
-      translate(squareSize, 0)
+  // loop through 2dArray of gridMatrices drawing squares
+  const squareSize = 40;
+  // each index in the arrray represents a row
+  for (let i = 0; i < gridMatrices.length; i++) {
+    // each index in the nested array represents a col
+    for (let j = 0; j < gridMatrices[i].length; j++) {
+      // multiply each index by size to get x,y offsets
+      const x = j * squareSize;
+      const y = i * squareSize;
+      // rect(x, y, w, h)
+      rect(x, y, squareSize, squareSize);
     }
-  })
+  }
   noLoop()
 }
