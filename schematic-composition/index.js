@@ -23,18 +23,24 @@ const GRID_MATRICES = [
 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ]
 
-const GRID_DIMENSIONS = [
-  GRID_MATRICES.length,
-  GRID_MATRICES.reduce((x, y) => Math.max(x, y.length), 0)
-];
-
-console.log(GRID_DIMENSIONS)
+function getMaxGridHeight() {
+  // creates an array of dimension length
+  // [<number-of-rows>, <number-of-cols-per-row>]
+  const dimensions = [
+    // just count the length of indexes in the first level of the 2d array
+    GRID_MATRICES.length,
+    // ????
+    GRID_MATRICES.reduce((x, y) => Math.max(x, y.length), 0)
+  ];
+  const maxGridHeight = (windowWidth / dimensions[1]) * dimensions[0]
+  return maxGridHeight
+}
 
 function setup() {
-  const MAX_GRID_HEIGHT = (windowWidth / GRID_DIMENSIONS[1]) * GRID_DIMENSIONS[0]
-  console.log(MAX_GRID_HEIGHT)
-  createCanvas(windowWidth, MAX_GRID_HEIGHT)
-  background(BEIGE)
+  document.getElementsByTagName("body")[0].style = 'margin: 0px' // remove default browser margin on the body element
+  // we need to pass a max grid height as the scond varable to keep the dynamic
+  // ratio in relationship to the amount of rows we might expect to generate
+  createCanvas(windowWidth, getMaxGridHeight())
 }
 
 function draw() {
