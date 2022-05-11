@@ -1,6 +1,7 @@
 // Schematic Composition
 // Sophie Taeuber-Arp1933
 // Physical Dimensions: 35 3/8 x 49 1/4" (89.6 x 125 cm)
+// https://artsandculture.google.com/asset/schematic-composition/CAHQW3Vwuf5e0g
 
 // Setup Global Variables
 
@@ -43,16 +44,18 @@ function getMaxGridHeight() {
   // create an array of dimensions x,y by length
   // the return should contain [<number-of-rows>, <number-of-cols-per-row>]
   const dimensions = [
-    // just count the length of indexes in the first level of the 2d array
+    // for "x" just count the length of indexes in the first level of the 2d array
     GRID_MATRICES.length,
 
-    // we can compare the two values of length in a 2d array and useing
-    // Math.max and a reducer to compute maximum index for our y length
+    // for "y" we can compare the two values of length in a 2d array and using
+    // Math.max and a reducer to compute maximum index from our y length
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max
     GRID_MATRICES.reduce((x, y) => Math.max(x, y.length), 0)
   ];
+
   // calculate the max grid height based on our dimension values
   const maxGridHeight = (windowWidth / dimensions[1]) * dimensions[0]
+
   // return our calculated gridHeight
   return maxGridHeight
 }
@@ -61,7 +64,7 @@ function getMaxGridHeight() {
 
 function setup() {
   // remove default browser margin on the body element
-  // so our canvas fits snug to the window 0,0 index
+  // so our canvas fits snug to the windows 0,0 index
   document.getElementsByTagName("body")[0].style = 'margin: 0px'
 
   // we need to pass a max grid height as the second varable to keep the dynamic
@@ -79,7 +82,9 @@ function draw() {
     const squareSize = height / GRID_MATRICES[i].length
 
     // each index in the nested array represents a col
-    // when nesting loops it is best practice to initalize the first variable as "i", and the second variable as "j"
+
+    // when nesting for loops it is best practice to initalize the first variable as "i", and the second variable as "j"
+
     for (let j = 0; j < GRID_MATRICES[i].length; j++) {
       // multiply each index by size to get our x,y offsets
       // for each squares coordinates
@@ -94,6 +99,7 @@ function draw() {
       // in order to get at the value of in our 2d Array for each case
       // we need to find the coordinate in the matrices by combining row
       // and col index, ie. array[<row-index>][<col-index>]
+
       switch (GRID_MATRICES[i][j]) {
         case 0:
           // 0 = black square
@@ -128,5 +134,5 @@ function draw() {
         }
       }
     }
-    noLoop()
+    noLoop() // we only need to draw once
 }
