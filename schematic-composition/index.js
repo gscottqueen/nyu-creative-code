@@ -45,12 +45,17 @@ function getMaxGridHeight(windowWidth) {
   // create an array of dimensions x,y by length
   // the return should contain [<number-of-rows>, <number-of-cols-per-row>]
   const dimensions = [
-    // for "x" just count the length of indexes in the first level of the 2d array
+    // for "x" just count the length in the first level of the 2d array
     GRID_MATRICES.length,
 
     // for "y" we can compare the two values of length in a 2d array and using
     // Math.max and a reducer to compute maximum index from our y length
+
+		// learn more about Math.max here
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max
+
+		// learn more about the reduce function here
+		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
     GRID_MATRICES.reduce((x, y) => Math.max(x, y.length), 0)
   ];
 
@@ -69,6 +74,9 @@ function setup() {
   // we need to pass a max grid height as the second varable to keep the dynamic
   // ratio in relationship to the amount of rows we might expect to generate
   // from our GRID_MATRICES array
+
+  //because windowWidth is not a global value outside of p5js methods,
+  // we need to pass it to our getMaxGridHeight function to keep it in scope
   createCanvas(windowWidth, getMaxGridHeight(windowWidth))
 }
 
@@ -76,7 +84,7 @@ function draw() {
   // loop through 2d array of GRID_MATRICES drawing squares
   // each index in the arrray represents a row
   for (let i = 0; i < GRID_MATRICES.length; i++) {
-    // we can get a dynamic squareSize by utilizing our setup width
+    // we can get a dynamic squareSize by utilizing our setup height
     // to help create a dynamic drawing on initial render
     const squareSize = height / GRID_MATRICES[i].length
 
@@ -98,7 +106,7 @@ function draw() {
       // here https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
 
       // in order to get at the value of in our 2d Array for each case
-      // we need to find the coordinate in the matrices by combining row
+      // we need to find the coordinate in the matrix by combining row
       // and col index, ie. array[<row-index>][<col-index>]
 
       switch (GRID_MATRICES[i][j]) {
