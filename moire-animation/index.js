@@ -1,17 +1,19 @@
 
-// Creates two opposing and overlapping sine waves
-// which generates moire style patterns
+// Creates two opposing and overlapping sine wave patterns
+// which generates moire style animation
 
-// set up our variables and values
+// set up our mutable variables and values
 let dx; // Value for incrementing x
 let yvalues; // Array of height values for the wave
-let theta = 0.0; // Start angle at 0
+let theta = 0; // Start angle at 0
 
 // Try different values below for experimenting with the pattern
+let amplitude = 400; // Height of wave
+let period = 800; // How many pixels before the wave repeats
+
+// set up our constant values
 const xspacing = 2; // Distance between each horizontal line
 const numberOfLines = 1000
-let amplitude = 400.0; // Height of wave
-let period = 800.0; // How many pixels before the wave repeats
 
 // Create global functions
 // Sourced from p5.js sine wave example
@@ -19,9 +21,8 @@ let period = 800.0; // How many pixels before the wave repeats
 
 function calculateWave() {
   // Increment theta
-  // Try different values here to change the speed for'angular velocity' here
-
   // Theta is a common way to reference the measure of an angle
+  // Try different values here to change the speed for'angular velocity' here
   theta += 0.01;
 
   // For every x value, calculate a y value with sine function
@@ -71,7 +72,8 @@ function renderMoireWaveGroup() {
   // draw first set of moire wave patterns
   drawMoireWaveSet()
 
-  // rotate then draw mirrored shapes
+  // rotate origin
+  // this helps creates a more fractal overaly
   translate(width / 4, height / 2)
 
   // draw second set of moire wave patterns, rotated
@@ -82,14 +84,23 @@ function setup() {
   // remove default browser margin on the body element
   // so our canvas fits snug to the windows 0,0 index
   document.getElementsByTagName("body")[0].style = 'margin: 0px'
+  // set up canvas
   createCanvas(windowWidth, windowHeight);
+  // set up our reference yvalues and incrementing dx value
   dx = (PI / period) * xspacing;
   yvalues = new Array(floor(numberOfLines));
-  frameRate(40) // slow down frame rate
+  // slow down frame rate
+  // for a more graceful animation
+  frameRate(40)
 }
 
 function draw() {
+  // set background color
   background('black');
+
+  // calculate our waves
   calculateWave();
+
+  // render our wave groups
   renderMoireWaveGroup();
 }
