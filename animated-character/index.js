@@ -5,9 +5,9 @@ function getRandomInt(min, max) {
 }
 
 const offset = 5
-const x = getRandomInt(30, 60)
-const eyeDiameter = getRandomInt(20, 60)
-const drawSecondEye = getRandomInt(0, 2)
+const x = getRandomInt(75, 200)
+const eyeDiameter = getRandomInt(75, 200)
+const drawSecondEye = getRandomInt(0, 5)
 const mouthTiltX = getRandomInt(-10, 10)
 const mouthTiltY = getRandomInt(-10,10)
 
