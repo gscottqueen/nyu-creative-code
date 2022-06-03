@@ -2,6 +2,7 @@
 let centerXPosition, centerYPosition
 // set up constant variables
 const offset = 10
+const head = document.getElementsByTagName("head");
 // set up constant variables whose values are random integers
 const x = getRandomInt(75, 200)
 const interirorEyeFraction = getRandomInt(2,5)
@@ -20,6 +21,32 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
 }
+
+// this listens for keydown events and prints the screen
+// if the spacebar is pressed
+document.addEventListener("keydown", event => {
+  event.keyCode === 32 && window.print()
+});
+
+function addPrintPageCSS() {
+
+  const css = '@page { size: landscape; }'
+  const head = document.head || document.getElementsByTagName('head')[0]
+  const style = document.createElement('style');
+
+  style.type = 'text/css';
+  style.media = 'print';
+
+  if (style.styleSheet){
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+
+  head.appendChild(style);
+}
+
+addPrintPageCSS();
 
 function setup() {
   // remove default browser margin on the body element
@@ -81,7 +108,7 @@ function drawEye() {
   }
 }
 
-// TODO: need to include positionX, positionY, characterWidth, characterHeight, and characterColor
+// TODO: need to include positionX, positionY, characterWidth, characterHeight, and characterColor in one single character
 
 function draw() {
   const color = random(255)
@@ -92,14 +119,17 @@ function draw() {
     random(2), // here we have access to p5.js random() so we can use it freely
     random(2)
   )
+  // we always draw at least one eye
   drawEye()
   if (secondEye !== 0) {
+    // usually we draw two eyes unles we generate a 0 on load
     translate(x * 2, 0)
     drawEye()
     translate(-x * 2, 0)
   }
   stroke('white')
   strokeWeight(2)
+  // simple mouth with a bit of tilt for less serious characters
   line(
     centerXPosition - x + mouthTiltX,
     centerYPosition + eyeDiameter + mouthTiltX,
