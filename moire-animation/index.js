@@ -1,4 +1,3 @@
-
 // Creates two opposing and overlapping sine wave patterns
 // which generates moire style animation
 
@@ -7,22 +6,22 @@ let dx; // Value for incrementing x
 let yvalues; // Array of height values for the wave
 let theta = 0; // Start angle at 0
 
-// Try different values below for experimenting with the pattern
-let amplitude = 400; // Height of wave
-let period = 800; // How many pixels before the wave repeats
-
 // set up our constant values
+// Try different values below for experimenting with the pattern
+const amplitude = 400; // Height of wave
+const period = 800; // How many pixels before the wave repeats
 const xspacing = 2; // Distance between each horizontal line
-const numberOfLines = 1000
+const numberOfLines = 1000;
 
 // Create global functions
+
 // Sourced from p5.js sine wave example
 // https://p5js.org/examples/math-sine-wave.html
 
 function calculateWave() {
   // Increment theta
   // Theta is a common way to reference the measure of an angle
-  // Try different values here to change the speed for'angular velocity' here
+  // Try different values here to change the speed for 'angular velocity'
   theta += 0.01;
 
   // For every x value, calculate a y value with sine function
@@ -33,15 +32,19 @@ function calculateWave() {
   }
 }
 
+// each group will be made up of two moire sign wave patterns
 function drawMoireWaveSet(rotate) {
   // draw sine wave with vertex lines
   beginShape(LINES);
 
-  // if the rotate parameter is defined,
-  // then we rotate the shape
+  // if the rotate parameter is defined, then we rotate the shape
+
   // to learn more about rotate
   // https://p5js.org/reference/#/p5/rotate
-  rotate && rotate(PI)
+
+  if (rotate !== undefined) {
+    rotate(PI);
+  }
 
   // iterate through the yvalues array and generate
   // a vertex line with two vertex(x,y) cordinates
@@ -49,10 +52,8 @@ function drawMoireWaveSet(rotate) {
   // to learn more about drawing vertex
   // https://p5js.org/reference/#/p5/vertex
   for (let x = 0; x < yvalues.length; x++) {
-
     // You can change the coordinate combinations here to manipulate the lines
-    // I really just went with a trial and error approach until
-    // I got something I liked
+    // I really just went with a trial and error approach until I got something I liked
     vertex(x * xspacing + width + yvalues[x], height + yvalues[x]);
     vertex(x - xspacing, yvalues[x]);
 
@@ -63,40 +64,44 @@ function drawMoireWaveSet(rotate) {
   endShape();
 }
 
+// each group will be made up of two moire wave sets
 function renderMoireWaveGroup() {
-  stroke('white')
-
   // offset startpoint to visually center
-  translate(width / 4 + 200, height / 4)
+  translate(width / 4 + 200, height / 4);
 
   // draw first set of moire wave patterns
-  drawMoireWaveSet()
+  drawMoireWaveSet();
 
   // rotate origin
   // this helps creates a more fractal overaly
-  translate(width / 4, height / 2)
+  translate(width / 4, height / 2);
 
   // draw second set of moire wave patterns, rotated
-  drawMoireWaveSet(rotate)
+  drawMoireWaveSet(rotate);
 }
 
 function setup() {
   // remove default browser margin on the body element
   // so our canvas fits snug to the windows 0,0 index
-  document.getElementsByTagName("body")[0].style = 'margin: 0px'
+  document.getElementsByTagName("body")[0].style = "margin: 0px";
+
   // set up canvas
   createCanvas(windowWidth, windowHeight);
+
   // set up our reference yvalues and incrementing dx value
   dx = (PI / period) * xspacing;
   yvalues = new Array(floor(numberOfLines));
-  // slow down frame rate
-  // for a more graceful animation
-  frameRate(40)
+
+  // slow down frame rate for a more graceful animation
+  frameRate(40);
 }
 
 function draw() {
   // set background color
-  background('black');
+  background("black");
+
+  // set stroke color
+  stroke("white");
 
   // calculate our waves
   calculateWave();

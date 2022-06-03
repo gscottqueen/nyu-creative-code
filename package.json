@@ -1,0 +1,11 @@
+{
+  "name": "nyu-creative-code",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:gscottqueen/nyu-creative-code.git",
+  "author": "gscottqueen <geoffreysqueen@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "server": "http-server ."
+  }
+}
