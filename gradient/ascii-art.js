@@ -13,6 +13,7 @@ var pg;
 function setup() {
   //paragraph for display of ascii result
   resdiv = createP('');
+  textSize(6);
 
   //video capture elements
   pg = createGraphics(160,120);
