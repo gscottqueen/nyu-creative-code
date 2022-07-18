@@ -6,6 +6,6 @@
   "author": "gscottqueen <geoffreysqueen@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "server": "http-server ."
+    "start": "http-server ."
   }
 }
